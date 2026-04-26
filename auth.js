@@ -37,6 +37,51 @@ function validateEmailRules(email) {
   return { isValid: true, msg: "" };
 }
 
+// Real-time Input Validation
+function validateInput(inputElement) {
+  const id = inputElement.id;
+  const value = inputElement.value.trim();
+  const errorElement = document.getElementById(`error-${id}`);
+  let isValid = true;
+  let msg = '';
+
+  if (value === '') {
+    // Optional: could show "Required" or just clear error on empty
+    isValid = true; 
+    msg = '';
+  } else if (id.includes('email')) {
+    const emailCheck = validateEmailRules(value);
+    isValid = emailCheck.isValid;
+    msg = emailCheck.msg;
+  } else if (id.includes('name')) {
+    if (value.length < 3) {
+      isValid = false;
+      msg = 'Name must be at least 3 characters.';
+    }
+  } else if (id.includes('password')) {
+    if (value.length < 8) {
+      isValid = false;
+      msg = 'Password must be at least 8 characters.';
+    }
+  }
+
+  if (!isValid && value !== '') {
+    inputElement.classList.add('invalid');
+    if (errorElement) {
+      errorElement.textContent = msg;
+      errorElement.classList.add('active');
+    }
+  } else {
+    inputElement.classList.remove('invalid');
+    if (errorElement) {
+      errorElement.textContent = '';
+      errorElement.classList.remove('active');
+    }
+  }
+  
+  return isValid;
+}
+
 function showMsg(message, type) {
   const msgDiv = document.getElementById('auth-msg');
   msgDiv.textContent = message;
@@ -85,20 +130,22 @@ function switchTab(tab) {
 function handleSignup(event) {
   event.preventDefault();
   
-  const name = document.getElementById('signup-name').value.trim();
-  const email = document.getElementById('signup-email').value.trim();
-  const password = document.getElementById('signup-password').value;
+  const nameInput = document.getElementById('signup-name');
+  const emailInput = document.getElementById('signup-email');
+  const passwordInput = document.getElementById('signup-password');
 
-  if (name.length < 3) {
-    showMsg('Name must be at least 3 characters long.', 'error');
+  const isNameValid = validateInput(nameInput) && nameInput.value.trim() !== '';
+  const isEmailValid = validateInput(emailInput) && emailInput.value.trim() !== '';
+  const isPasswordValid = validateInput(passwordInput) && passwordInput.value !== '';
+
+  if (!isNameValid || !isEmailValid || !isPasswordValid) {
+    // Errors are already shown inline by validateInput
     return;
   }
 
-  const emailValidation = validateEmailRules(email);
-  if (!emailValidation.isValid) {
-    showMsg(emailValidation.msg, 'error');
-    return;
-  }
+  const name = nameInput.value.trim();
+  const email = emailInput.value.trim();
+  const password = passwordInput.value;
 
   if (password.length < 8) {
     showMsg('Password must be at least 8 characters long.', 'error');
@@ -127,14 +174,18 @@ function handleSignup(event) {
 function handleLogin(event) {
   event.preventDefault();
 
-  const email = document.getElementById('login-email').value.trim();
-  const password = document.getElementById('login-password').value;
+  const emailInput = document.getElementById('login-email');
+  const passwordInput = document.getElementById('login-password');
 
-  const emailValidation = validateEmailRules(email);
-  if (!emailValidation.isValid) {
-    showMsg(emailValidation.msg, 'error');
+  const isEmailValid = validateInput(emailInput) && emailInput.value.trim() !== '';
+  const isPasswordValid = validateInput(passwordInput) && passwordInput.value !== '';
+
+  if (!isEmailValid || !isPasswordValid) {
     return;
   }
+
+  const email = emailInput.value.trim();
+  const password = passwordInput.value;
 
   const users = JSON.parse(localStorage.getItem(USERS_KEY));
   const user = users.find(u => u.email.toLowerCase() === email.toLowerCase() && u.password === password);

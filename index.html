@@ -21,12 +21,9 @@
   <!-- AUTH PAGE (Full Screen) -->
   <div id="auth-page" class="auth-page">
     <div class="auth-page__container">
+      <div class="auth-page__brand">Abdulrahman</div>
       <div class="auth-page__card">
         <div class="auth-page__left">
-          <div class="auth-page__logo">
-            <div class="logo-box">A</div>
-            <span>Abdulrahman</span>
-          </div>
           <div class="auth-header">
             <h1>Welcome Back</h1>
             <p>Please sign in to access the portfolio.</p>
@@ -39,16 +36,31 @@
             <button id="tab-signup" class="auth-tab" onclick="switchTab('signup')">Sign Up</button>
           </div>
 
-          <form id="form-login" class="auth-form active" onsubmit="handleLogin(event)">
-            <input type="email" id="login-email" placeholder="Email Address" required>
-            <input type="password" id="login-password" placeholder="Password" required>
+          <form id="form-login" class="auth-form active" onsubmit="handleLogin(event)" novalidate>
+            <div class="input-group">
+              <input type="email" id="login-email" placeholder="Email Address" oninput="validateInput(this)">
+              <div class="field-error" id="error-login-email"></div>
+            </div>
+            <div class="input-group">
+              <input type="password" id="login-password" placeholder="Password" oninput="validateInput(this)">
+              <div class="field-error" id="error-login-password"></div>
+            </div>
             <button type="submit" class="btn-primary">Sign In</button>
           </form>
 
-          <form id="form-signup" class="auth-form" onsubmit="handleSignup(event)">
-            <input type="text" id="signup-name" placeholder="Full Name" required>
-            <input type="email" id="signup-email" placeholder="Email Address" required>
-            <input type="password" id="signup-password" placeholder="Password" required>
+          <form id="form-signup" class="auth-form" onsubmit="handleSignup(event)" novalidate>
+            <div class="input-group">
+              <input type="text" id="signup-name" placeholder="Full Name" oninput="validateInput(this)">
+              <div class="field-error" id="error-signup-name"></div>
+            </div>
+            <div class="input-group">
+              <input type="email" id="signup-email" placeholder="Email Address" oninput="validateInput(this)">
+              <div class="field-error" id="error-signup-email"></div>
+            </div>
+            <div class="input-group">
+              <input type="password" id="signup-password" placeholder="Password" oninput="validateInput(this)">
+              <div class="field-error" id="error-signup-password"></div>
+            </div>
             <button type="submit" class="btn-primary">Create Account</button>
           </form>
         </div>
