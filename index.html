@@ -10,6 +10,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Inter:wght@100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Lenis for Smooth Scroll -->
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script> 
 </head>
 <body>
 
@@ -18,7 +20,6 @@
     <div class="container">
       <div class="navbar__inner">
         <a href="#" class="navbar__logo">
-          <div class="logo-box">A</div>
           <span>Abdulrahman</span>
         </a>
         
@@ -55,6 +56,7 @@
 
   <!-- HERO SECTION -->
   <section class="hero" id="home">
+    <div class="bg-grid"></div>
     <div class="container">
       <div class="hero__inner">
         <div class="hero__content fade-in">
@@ -87,6 +89,7 @@
 
   <!-- ABOUT ME SECTION -->
   <section class="about" id="about">
+    <div class="bg-grid"></div>
     <div class="container">
       <div class="about__inner fade-in">
         <div class="about__content">
@@ -110,10 +113,6 @@
         <div class="about__image">
           <div class="image-wrapper">
              <img src="assets/about.svg" alt="About Me">
-             <div class="experience-tag">
-               <strong>BIS</strong>
-               <span>Education</span>
-             </div>
           </div>
         </div>
       </div>
@@ -122,6 +121,7 @@
 
   <!-- SKILLS SECTION -->
   <section class="skills" id="skills">
+    <div class="bg-grid"></div>
     <div class="container">
       <div class="section-header fade-in">
         <span class="section-tag">Skills</span>
@@ -131,12 +131,14 @@
         <div class="skill-card"><i class="fa-brands fa-html5"></i><span>HTML5</span></div>
         <div class="skill-card"><i class="fa-brands fa-css3-alt"></i><span>CSS3</span></div>
         <div class="skill-card"><i class="fa-brands fa-js"></i><span>JavaScript</span></div>
-        <div class="skill-card"><i class="fa-solid fa-code"></i><span>TypeScript</span></div>
-        <div class="skill-card"><i class="fa-solid fa-bolt"></i><span>Dart</span></div>
+        <div class="skill-card"><img src="https://cdn.simpleicons.org/typescript/000000" alt="TypeScript" width="32"><span>TypeScript</span></div>
+        <div class="skill-card"><img src="https://cdn.simpleicons.org/python/000000" alt="Python" width="32"><span>Python</span></div>
+        <div class="skill-card"><i class="fa-brands fa-node-js"></i><span>Node.js</span></div>
+        <div class="skill-card"><img src="https://cdn.simpleicons.org/dart/000000" alt="Dart" width="32"><span>Dart</span></div>
         <div class="skill-card"><i class="fa-brands fa-react"></i><span>React</span></div>
-        <div class="skill-card"><i class="fa-solid fa-window-maximize"></i><span>Electron</span></div>
-        <div class="skill-card"><i class="fa-solid fa-mobile"></i><span>Flutter</span></div>
-        <div class="skill-card"><i class="fa-brands fa-github"></i><span>Git</span></div>
+        <div class="skill-card"><img src="https://cdn.simpleicons.org/electron/000000" alt="Electron" width="32"><span>Electron</span></div>
+        <div class="skill-card"><img src="https://cdn.simpleicons.org/flutter/000000" alt="Flutter" width="32"><span>Flutter</span></div>
+        <div class="skill-card"><i class="fa-brands fa-git-alt"></i><span>Git</span></div>
         <div class="skill-card"><i class="fa-solid fa-database"></i><span>SQL</span></div>
       </div>
     </div>
@@ -144,6 +146,7 @@
 
   <!-- PROJECTS SECTION -->
   <section class="projects" id="projects">
+    <div class="bg-grid"></div>
     <div class="container">
       <div class="section-header fade-in">
         <span class="section-tag">Portfolio</span>
@@ -230,6 +233,7 @@
 
   <!-- CONTACT SECTION -->
   <section class="contact" id="contact">
+    <div class="bg-grid"></div>
     <div class="container">
       <div class="contact__inner fade-in">
         <div class="contact__info">
@@ -283,7 +287,6 @@
       <div class="footer__inner">
         <div class="footer__brand">
           <a href="#" class="navbar__logo">
-            <div class="logo-box">A</div>
             <span>Abdulrahman</span>
           </a>
           <p>Multi-Platform Developer crafting premium digital experiences.</p>
@@ -353,8 +356,25 @@
     <i class="fa-solid fa-arrow-up"></i>
   </button>
 
+
   <script src="auth.js"></script>
   <script>
+    // Initialize Lenis for Smooth Scroll
+    const lenis = new Lenis({
+      lerp: 0.5,
+      wheelMultiplier: 1,
+      gestureOrientation: 'vertical',
+      normalizeWheel: true,
+      smoothWheel: true
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
     // Navigation & Mobile Menu
     const navToggle = document.getElementById('nav-toggle');
     const navMobile = document.getElementById('nav-mobile');
@@ -363,25 +383,41 @@
       navMobile.classList.toggle('open');
     });
 
-    // Fade-in Observer
+    // Close mobile menu on link click
+    document.querySelectorAll('.navbar__mobile a').forEach(link => {
+      link.addEventListener('click', () => {
+        navToggle.classList.remove('open');
+        navMobile.classList.remove('open');
+      });
+    });
+
+    // Scroll Reveal Animation (Intersection Observer)
+    const observerOptions = {
+      threshold: 0.1
+    };
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
         }
       });
-    }, { threshold: 0.1 });
+    }, observerOptions);
 
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-    // Scroll Top
-    const scrollTop = document.getElementById('scroll-top');
+    // Scroll Top Button
+    const scrollTopBtn = document.getElementById('scroll-top');
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 500) scrollTop.classList.add('visible');
-      else scrollTop.classList.remove('visible');
+      if (window.scrollY > 500) {
+        scrollTopBtn.classList.add('visible');
+      } else {
+        scrollTopBtn.classList.remove('visible');
+      }
     });
-    scrollTop.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    scrollTopBtn.addEventListener('click', () => {
+      lenis.scrollTo(0);
     });
   </script>
 </body>
