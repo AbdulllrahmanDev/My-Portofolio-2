@@ -13,7 +13,53 @@
   <!-- Lenis for Smooth Scroll -->
   <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script> 
 </head>
-<body>
+<body class="auth-locked">
+  <!-- AUTH PAGE (Full Screen) -->
+  <div id="auth-page" class="auth-page">
+    <div class="auth-page__container">
+      <div class="auth-page__card">
+        <div class="auth-page__left">
+          <div class="auth-page__logo">
+            <div class="logo-box">A</div>
+            <span>Abdulrahman</span>
+          </div>
+          <div class="auth-header">
+            <h1>Welcome Back</h1>
+            <p>Please sign in to access the portfolio.</p>
+          </div>
+          
+          <div id="auth-msg" class="auth-message"></div>
+
+          <div class="auth-tabs">
+            <button id="tab-login" class="auth-tab active" onclick="switchTab('login')">Login</button>
+            <button id="tab-signup" class="auth-tab" onclick="switchTab('signup')">Sign Up</button>
+          </div>
+
+          <form id="form-login" class="auth-form active" onsubmit="handleLogin(event)">
+            <input type="email" id="login-email" placeholder="Email Address" required>
+            <input type="password" id="login-password" placeholder="Password" required>
+            <button type="submit" class="btn-primary">Sign In</button>
+          </form>
+
+          <form id="form-signup" class="auth-form" onsubmit="handleSignup(event)">
+            <input type="text" id="signup-name" placeholder="Full Name" required>
+            <input type="email" id="signup-email" placeholder="Email Address" required>
+            <input type="password" id="signup-password" placeholder="Password" required>
+            <button type="submit" class="btn-primary">Create Account</button>
+          </form>
+        </div>
+        <div class="auth-page__right">
+          <div class="bg-grid"></div>
+          <div class="auth-illustration">
+            <img src="assets/images/home.svg" alt="Auth Illustration">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN PORTFOLIO CONTENT (Hidden by default) -->
+  <div id="main-content" style="display: none;">
 
   <!-- NAVBAR -->
   <nav class="navbar">
@@ -313,43 +359,7 @@
     </div>
   </footer>
 
-  <!-- AUTH MODAL -->
-  <div class="auth-modal" id="auth-modal">
-    <div class="auth-modal__overlay" onclick="closeAuthModal()"></div>
-    <div class="auth-modal__content">
-      <button class="auth-modal__close" onclick="closeAuthModal()">&times;</button>
-      <div class="auth-split">
-        <div class="auth-illustration">
-          <img src="assets/login-illustration.svg" alt="Auth">
-        </div>
-        <div class="auth-form-wrapper">
-          <div class="auth-header">
-            <h1>Welcome Back</h1>
-            <p>Please enter your details to continue.</p>
-          </div>
-          <div class="auth-tabs">
-            <button class="auth-tab active" id="tab-login" onclick="switchTab('login')">Login</button>
-            <button class="auth-tab" id="tab-signup" onclick="switchTab('signup')">Sign Up</button>
-          </div>
-          
-          <div id="auth-msg" class="auth-message"></div>
-
-          <form id="form-login" class="auth-form active" onsubmit="handleLogin(event)">
-            <input type="email" id="login-email" placeholder="Email" required>
-            <input type="password" id="login-password" placeholder="Password" required>
-            <button type="submit" class="btn-primary">Login</button>
-          </form>
-
-          <form id="form-signup" class="auth-form" onsubmit="handleSignup(event)">
-            <input type="text" id="signup-name" placeholder="Full Name" required>
-            <input type="email" id="signup-email" placeholder="Email" required>
-            <input type="password" id="signup-password" placeholder="Password" required>
-            <button type="submit" class="btn-primary">Create Account</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
+  </div> <!-- End of main-content -->
 
   <!-- SCROLL TO TOP -->
   <button class="scroll-top" id="scroll-top">
@@ -406,7 +416,21 @@
 
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-    // Scroll Top Button
+    document.querySelectorAll('.navbar__links a, .navbar__mobile a, .navbar__logo').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetAttr = this.getAttribute('href');
+        if (targetAttr === '#') {
+          lenis.scrollTo(0);
+        } else {
+          const targetEl = document.querySelector(targetAttr);
+          if (targetEl) {
+            lenis.scrollTo(targetEl, { offset: 0 });
+          }
+        }
+      });
+    });
+
     const scrollTopBtn = document.getElementById('scroll-top');
     window.addEventListener('scroll', () => {
       if (window.scrollY > 500) {

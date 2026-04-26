@@ -7,13 +7,51 @@ if (!localStorage.getItem(USERS_KEY)) {
   localStorage.setItem(USERS_KEY, JSON.stringify([]));
 }
 
+// Validation Rules from Main Site
+function validateEmailRules(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    return { isValid: false, msg: "Invalid email format. Use example@gmail.com" };
+  }
+
+  const [localPart, domainPart] = email.split('@');
+  const lowerDomain = domainPart.toLowerCase();
+  const allowedDomains = ['gmail.com', 'yahoo.com', 'outlook.com', 'hotmail.com', 'icloud.com', 'live.com', 'me.com'];
+
+  if (!allowedDomains.includes(lowerDomain)) {
+    return { isValid: false, msg: "Please use a common provider (Gmail, Yahoo, etc.)" };
+  }
+
+  if (localPart.length < 4) {
+    return { isValid: false, msg: "The part before @ must be at least 4 characters." };
+  }
+
+  if (/([._]){2,}/.test(localPart)) {
+    return { isValid: false, msg: "Email cannot contain consecutive dots or underscores." };
+  }
+
+  if (/^[._]|[._]$/.test(localPart)) {
+    return { isValid: false, msg: "Email cannot start or end with a dot or underscore." };
+  }
+
+  return { isValid: true, msg: "" };
+}
+
 function showMsg(message, type) {
   const msgDiv = document.getElementById('auth-msg');
   msgDiv.textContent = message;
   msgDiv.className = `auth-message ${type}`;
+  msgDiv.style.display = 'block';
 }
 
 function switchTab(tab) {
+  const card = document.querySelector('.auth-page__card');
+  if (tab === 'signup') {
+    card.classList.add('signup-mode');
+  } else {
+    card.classList.remove('signup-mode');
+  }
+
   // Update Tabs
   document.getElementById('tab-login').classList.remove('active');
   document.getElementById('tab-signup').classList.remove('active');
@@ -25,7 +63,11 @@ function switchTab(tab) {
   document.getElementById(`form-${tab}`).classList.add('active');
 
   // Clear messages
-  document.getElementById('auth-msg').className = 'auth-message';
+  const msgDiv = document.getElementById('auth-msg');
+  if (msgDiv) {
+    msgDiv.className = 'auth-message';
+    msgDiv.style.display = 'none';
+  }
   
   // Update header text dynamically
   const headerTitle = document.querySelector('.auth-header h1');
@@ -33,10 +75,10 @@ function switchTab(tab) {
   
   if (tab === 'login') {
     headerTitle.textContent = 'Welcome Back';
-    headerDesc.textContent = 'Please enter your details to continue.';
+    headerDesc.textContent = 'Please sign in to access the portfolio.';
   } else {
     headerTitle.textContent = 'Create Account';
-    headerDesc.textContent = 'Get started with your free account.';
+    headerDesc.textContent = 'Join to explore professional digital experiences.';
   }
 }
 
@@ -47,23 +89,36 @@ function handleSignup(event) {
   const email = document.getElementById('signup-email').value.trim();
   const password = document.getElementById('signup-password').value;
 
-  const users = JSON.parse(localStorage.getItem(USERS_KEY));
-
-  // Check if email already exists
-  if (users.find(u => u.email === email)) {
-    showMsg('Email is already registered. Please log in.', 'error');
+  if (name.length < 3) {
+    showMsg('Name must be at least 3 characters long.', 'error');
     return;
   }
 
-  // Add new user
+  const emailValidation = validateEmailRules(email);
+  if (!emailValidation.isValid) {
+    showMsg(emailValidation.msg, 'error');
+    return;
+  }
+
+  if (password.length < 8) {
+    showMsg('Password must be at least 8 characters long.', 'error');
+    return;
+  }
+
+  const users = JSON.parse(localStorage.getItem(USERS_KEY));
+
+  if (users.find(u => u.email.toLowerCase() === email.toLowerCase())) {
+    showMsg('This email is already registered.', 'error');
+    return;
+  }
+
   const newUser = { name, email, password };
   users.push(newUser);
   localStorage.setItem(USERS_KEY, JSON.stringify(users));
 
-  showMsg('Account created successfully! You can now log in.', 'success');
-  event.target.reset(); // clear form
+  showMsg('Success! Now you can sign in.', 'success');
+  event.target.reset();
   
-  // Auto switch to login tab after 1.5 seconds
   setTimeout(() => {
     switchTab('login');
   }, 1500);
@@ -75,52 +130,75 @@ function handleLogin(event) {
   const email = document.getElementById('login-email').value.trim();
   const password = document.getElementById('login-password').value;
 
+  const emailValidation = validateEmailRules(email);
+  if (!emailValidation.isValid) {
+    showMsg(emailValidation.msg, 'error');
+    return;
+  }
+
   const users = JSON.parse(localStorage.getItem(USERS_KEY));
-  const user = users.find(u => u.email === email && u.password === password);
+  const user = users.find(u => u.email.toLowerCase() === email.toLowerCase() && u.password === password);
 
   if (user) {
-    showMsg(`Welcome back, ${user.name}! Redirecting...`, 'success');
-    
-    // Set current user session
+    showMsg(`Welcome back, ${user.name}!`, 'success');
     localStorage.setItem(CURRENT_USER_KEY, JSON.stringify({ name: user.name, email: user.email }));
     
-    // Redirect to home page
     setTimeout(() => {
-      window.location.reload();
+      revealPortfolio();
     }, 1000);
   } else {
     showMsg('Invalid email or password.', 'error');
   }
 }
 
-function openAuthModal() {
-  document.getElementById('auth-modal').classList.add('open');
-  switchTab('login');
-  document.getElementById('form-login').reset();
-  document.getElementById('form-signup').reset();
-  document.getElementById('auth-msg').style.display = 'none';
+function revealPortfolio() {
+  const authPage = document.getElementById('auth-page');
+  const mainContent = document.getElementById('main-content');
+  
+  if (authPage) authPage.style.display = 'none';
+  if (mainContent) mainContent.style.display = 'block';
+  document.body.classList.remove('auth-locked');
+  
+  // Re-initialize any components if needed
+  updateAuthUI();
 }
 
-function closeAuthModal() {
-  document.getElementById('auth-modal').classList.remove('open');
+function updateAuthUI() {
+  const currentUser = JSON.parse(localStorage.getItem(CURRENT_USER_KEY));
+  const loginBtn = document.getElementById('nav-login-btn');
+  const mobileLoginBtn = document.getElementById('mobile-login-btn');
+
+  if (currentUser) {
+    const firstName = currentUser.name.split(' ')[0];
+    const uiContent = `👤 ${firstName}`;
+    
+    if (loginBtn) {
+      loginBtn.innerText = uiContent;
+      loginBtn.onclick = handleLogout;
+    }
+    if (mobileLoginBtn) {
+      mobileLoginBtn.innerText = uiContent;
+      mobileLoginBtn.onclick = handleLogout;
+    }
+  }
 }
 
-// Update UI on load
+function handleLogout(e) {
+  e.stopPropagation();
+  if (confirm('Are you sure you want to log out?')) {
+    localStorage.removeItem(CURRENT_USER_KEY);
+    window.location.reload();
+  }
+}
+
+// Initial Load
 window.addEventListener('DOMContentLoaded', () => {
   const currentUser = JSON.parse(localStorage.getItem(CURRENT_USER_KEY));
   if (currentUser) {
-    const loginBtns = [document.getElementById('nav-login-btn'), document.getElementById('mobile-login-btn')];
-    loginBtns.forEach(btn => {
-      if (btn) {
-        btn.innerText = '👤 ' + currentUser.name.split(' ')[0];
-        btn.onclick = (e) => {
-          e.stopPropagation();
-          if (confirm('Do you want to log out?')) {
-            localStorage.removeItem(CURRENT_USER_KEY);
-            window.location.reload();
-          }
-        };
-      }
-    });
+    revealPortfolio();
+  } else {
+    document.getElementById('auth-page').style.display = 'flex';
+    document.getElementById('main-content').style.display = 'none';
+    document.body.classList.add('auth-locked');
   }
 });
