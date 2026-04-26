@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Abdulrahman Hussein | Multi-Platform Developer</title>
-  <meta name="description" content="Portfolio of Abdulrahman Hussein, a Multi-Platform Developer specializing in Web, Mobile, and Desktop applications.">
+  <meta name="description"
+    content="Portfolio of Abdulrahman Hussein, a Multi-Platform Developer specializing in Web, Mobile, and Desktop applications.">
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Inter:wght@100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Inter:wght@100..900&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <!-- Lenis for Smooth Scroll -->
-  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script> 
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
 </head>
+
 <body class="auth-locked">
   <!-- AUTH PAGE (Full Screen) -->
   <div id="auth-page" class="auth-page">
@@ -27,7 +31,7 @@
             <h1>Welcome Back</h1>
             <p>Please sign in to access the portfolio.</p>
           </div>
-          
+
           <div id="auth-msg" class="auth-message"></div>
 
           <div class="auth-tabs">
@@ -51,7 +55,7 @@
         <div class="auth-page__right">
           <div class="bg-grid"></div>
           <div class="auth-illustration">
-            <img src="assets/images/home.svg" alt="Auth Illustration">
+            <img src="assets/Sign-in.svg" alt="Auth Illustration">
           </div>
         </div>
       </div>
@@ -61,303 +65,317 @@
   <!-- MAIN PORTFOLIO CONTENT (Hidden by default) -->
   <div id="main-content" style="display: none;">
 
-  <!-- NAVBAR -->
-  <nav class="navbar">
-    <div class="container">
-      <div class="navbar__inner">
-        <a href="#" class="navbar__logo">
-          <span>Abdulrahman</span>
-        </a>
-        
-        <div class="navbar__links">
-          <a href="#about">About</a>
-          <a href="#skills">Skills</a>
-          <a href="#projects">Projects</a>
-          <a href="#contact">Contact</a>
-        </div>
-
-        <div class="navbar__actions">
-          <button class="navbar__resume" id="nav-login-btn" onclick="openAuthModal()">Login</button>
-          <a href="#" class="btn-hire">Hire Me</a>
-        </div>
-
-        <!-- Hamburger -->
-        <button class="navbar__toggle" aria-label="Toggle Menu" id="nav-toggle">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </div>
-    </div>
-
-    <!-- Mobile Menu -->
-    <div class="navbar__mobile" id="nav-mobile">
-      <a href="#about">About</a>
-      <a href="#skills">Skills</a>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
-      <button class="navbar__resume" id="mobile-login-btn" onclick="openAuthModal()">Login</button>
-    </div>
-  </nav>
-
-  <!-- HERO SECTION -->
-  <section class="hero" id="home">
-    <div class="bg-grid"></div>
-    <div class="container">
-      <div class="hero__inner">
-        <div class="hero__content fade-in">
-          <span class="hero__badge">Available for freelance work</span>
-          <h1 class="hero__greeting">Hi, I'm <strong>Abdulrahman.</strong><br>Multi-Platform Developer.</h1>
-          <p class="hero__description">I build high-performance applications for Web, Mobile, and Desktop. From browsers to smartphones to PCs, I transform complex ideas into seamless digital experiences.</p>
-          
-          <div class="hero__btns">
-            <a href="#contact" class="btn-primary">Let's Talk <i class="fa-solid fa-arrow-right"></i></a>
-            <a href="#" class="btn-secondary">Download CV <i class="fa-solid fa-download"></i></a>
-          </div>
-
-          <div class="hero__socials">
-            <a href="https://github.com/abdulllrahmandev" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-            <a href="https://www.linkedin.com/in/abdulrahmanhusseiin/" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
-            <a href="https://wa.me/201062120142" target="_blank" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-          </div>
-        </div>
-        <div class="hero__image fade-in">
-          <div class="image-stack">
-            <div class="card-float"><i class="fa-solid fa-code"></i><span>Web</span></div>
-            <div class="card-float"><i class="fa-solid fa-mobile-screen"></i><span>Mobile</span></div>
-            <div class="card-float"><i class="fa-solid fa-desktop"></i><span>Desktop</span></div>
-            <img src="assets/home.svg" alt="Abdulrahman Illustration">
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ABOUT ME SECTION -->
-  <section class="about" id="about">
-    <div class="bg-grid"></div>
-    <div class="container">
-      <div class="about__inner fade-in">
-        <div class="about__content">
-          <span class="section-tag">About Me</span>
-          <h2 class="about__heading">Building Meaningful <strong>Digital Experiences</strong></h2>
-          <div class="about__text">
-            <p>I am a versatile Software Developer passionate about building robust, scalable applications for Android, Windows, and the Web. My journey is driven by a deep curiosity for architecture and a commitment to crafting high-quality software that bridges the gap between different platforms.</p>
-            <p>Whether it's architecting a complex Desktop environment, developing a fluid Mobile UI, or engineering a modern Web app, I focus on writing clean, maintainable code and delivering user-centered designs.</p>
-          </div>
-          <div class="about__stats">
-            <div class="stat-item">
-              <h3>10+</h3>
-              <p>Projects Built</p>
-            </div>
-            <div class="stat-item">
-              <h3>3+</h3>
-              <p>Years Experience</p>
-            </div>
-          </div>
-        </div>
-        <div class="about__image">
-          <div class="image-wrapper">
-             <img src="assets/about.svg" alt="About Me">
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SKILLS SECTION -->
-  <section class="skills" id="skills">
-    <div class="bg-grid"></div>
-    <div class="container">
-      <div class="section-header fade-in">
-        <span class="section-tag">Skills</span>
-        <h2 class="section-title">My <strong>Tech Stack</strong></h2>
-      </div>
-      <div class="skills__grid fade-in">
-        <div class="skill-card"><i class="fa-brands fa-html5"></i><span>HTML5</span></div>
-        <div class="skill-card"><i class="fa-brands fa-css3-alt"></i><span>CSS3</span></div>
-        <div class="skill-card"><i class="fa-brands fa-js"></i><span>JavaScript</span></div>
-        <div class="skill-card"><img src="https://cdn.simpleicons.org/typescript/000000" alt="TypeScript" width="32"><span>TypeScript</span></div>
-        <div class="skill-card"><img src="https://cdn.simpleicons.org/python/000000" alt="Python" width="32"><span>Python</span></div>
-        <div class="skill-card"><i class="fa-brands fa-node-js"></i><span>Node.js</span></div>
-        <div class="skill-card"><img src="https://cdn.simpleicons.org/dart/000000" alt="Dart" width="32"><span>Dart</span></div>
-        <div class="skill-card"><i class="fa-brands fa-react"></i><span>React</span></div>
-        <div class="skill-card"><img src="https://cdn.simpleicons.org/electron/000000" alt="Electron" width="32"><span>Electron</span></div>
-        <div class="skill-card"><img src="https://cdn.simpleicons.org/flutter/000000" alt="Flutter" width="32"><span>Flutter</span></div>
-        <div class="skill-card"><i class="fa-brands fa-git-alt"></i><span>Git</span></div>
-        <div class="skill-card"><i class="fa-solid fa-database"></i><span>SQL</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROJECTS SECTION -->
-  <section class="projects" id="projects">
-    <div class="bg-grid"></div>
-    <div class="container">
-      <div class="section-header fade-in">
-        <span class="section-tag">Portfolio</span>
-        <h2 class="section-title">Featured <strong>Projects</strong></h2>
-      </div>
-      
-      <div class="projects__grid">
-        <!-- Project 1 -->
-        <div class="project-card fade-in">
-          <div class="project-card__image">
-            <img src="assets/mobilestore.png" alt="Mobile Store">
-          </div>
-          <div class="project-card__content">
-            <h3>Mobile Store</h3>
-            <p>A high-performance e-commerce platform specializing in smartphones with full bilingual support.</p>
-            <div class="project-tags">
-              <span>HTML5</span><span>CSS3</span><span>JS</span>
-            </div>
-            <div class="project-links">
-              <a href="#"><i class="fa-brands fa-github"></i></a>
-              <a href="#"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-            </div>
-          </div>
-        </div>
-
-
-
-        <!-- Project 3 -->
-        <div class="project-card fade-in">
-          <div class="project-card__image">
-            <img src="assets/Accurate.png" alt="Productivity Suite">
-          </div>
-          <div class="project-card__content">
-            <h3>Accurate Productivity</h3>
-            <p>A premium desktop productivity suite with Pomodoro planner and task management.</p>
-            <div class="project-tags">
-              <span>React</span><span>TS</span><span>Electron</span>
-            </div>
-            <div class="project-links">
-              <a href="#"><i class="fa-brands fa-github"></i></a>
-              <a href="#"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project 4 -->
-        <div class="project-card fade-in">
-          <div class="project-card__image">
-            <img src="assets/managerdesktop.png" alt="Archiva">
-          </div>
-          <div class="project-card__content">
-            <h3>Archiva</h3>
-            <p>AI-driven document management system with automatic metadata extraction via LLMs.</p>
-            <div class="project-tags">
-              <span>Electron</span><span>Python</span><span>AI</span>
-            </div>
-            <div class="project-links">
-              <a href="#"><i class="fa-brands fa-github"></i></a>
-              <a href="#"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project 5 -->
-        <div class="project-card fade-in">
-          <div class="project-card__image">
-            <img src="assets/khoshou.png" alt="Khoshou App">
-          </div>
-          <div class="project-card__content">
-            <h3>Khoshou App</h3>
-            <p>A comprehensive Islamic spiritual companion app designed for tranquility and devotion.</p>
-            <div class="project-tags">
-              <span>Flutter</span><span>Dart</span><span>API</span>
-            </div>
-            <div class="project-links">
-              <a href="#"><i class="fa-brands fa-github"></i></a>
-              <a href="#"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT SECTION -->
-  <section class="contact" id="contact">
-    <div class="bg-grid"></div>
-    <div class="container">
-      <div class="contact__inner fade-in">
-        <div class="contact__info">
-          <span class="section-tag">Contact</span>
-          <h2 class="section-title">Let's <strong>Collaborate</strong></h2>
-          <p>I'm always open to discuss exciting projects and new opportunities. Let's build something amazing together!</p>
-          
-          <div class="contact-details">
-            <div class="detail-item">
-              <i class="fa-solid fa-envelope"></i>
-              <div>
-                <h4>Email</h4>
-                <p>abdulllrahman.dev@gmail.com</p>
-              </div>
-            </div>
-            <div class="detail-item">
-              <i class="fa-solid fa-phone"></i>
-              <div>
-                <h4>Phone</h4>
-                <p>+20 106 212 0142</p>
-              </div>
-            </div>
-            <div class="detail-item">
-              <i class="fa-solid fa-location-dot"></i>
-              <div>
-                <h4>Location</h4>
-                <p>Cairo, Egypt</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="contact__form">
-          <form id="contact-form">
-            <div class="form-row">
-              <input type="text" placeholder="Your Name" required>
-              <input type="email" placeholder="Your Email" required>
-            </div>
-            <input type="text" placeholder="Subject">
-            <textarea placeholder="How can I help you?" rows="5" required></textarea>
-            <button type="submit" class="btn-primary">Send Message</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer__inner">
-        <div class="footer__brand">
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <div class="container">
+        <div class="navbar__inner">
           <a href="#" class="navbar__logo">
             <span>Abdulrahman</span>
           </a>
-          <p>Multi-Platform Developer crafting premium digital experiences.</p>
+
+          <div class="navbar__links">
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+          </div>
+
+          <div class="navbar__actions">
+            <button class="navbar__resume" id="nav-login-btn" onclick="openAuthModal()">Login</button>
+            <a href="#" class="btn-hire">Hire Me</a>
+          </div>
+
+          <!-- Hamburger -->
+          <button class="navbar__toggle" aria-label="Toggle Menu" id="nav-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
         </div>
-        <div class="footer__links">
-          <h4>Navigation</h4>
-          <a href="#about">About</a>
-          <a href="#skills">Skills</a>
-          <a href="#projects">Projects</a>
-          <a href="#contact">Contact</a>
-        </div>
-        <div class="footer__socials">
-          <h4>Follow Me</h4>
-          <div class="social-icons">
-            <a href="https://github.com/abdulllrahmandev" target="_blank"><i class="fa-brands fa-github"></i></a>
-            <a href="https://www.linkedin.com/in/abdulrahmanhusseiin/" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
-            <a href="https://wa.me/201062120142" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div class="navbar__mobile" id="nav-mobile">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+        <button class="navbar__resume" id="mobile-login-btn" onclick="openAuthModal()">Login</button>
+      </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+      <div class="bg-grid"></div>
+      <div class="container">
+        <div class="hero__inner">
+          <div class="hero__content fade-in">
+            <span class="hero__badge">Available for freelance work</span>
+            <h1 class="hero__greeting">Hi, I'm <strong>Abdulrahman.</strong><br>Multi-Platform Developer.</h1>
+            <p class="hero__description">I build high-performance applications for Web, Mobile, and Desktop. From
+              browsers to smartphones to PCs, I transform complex ideas into seamless digital experiences.</p>
+
+            <div class="hero__btns">
+              <a href="#contact" class="btn-primary">Let's Talk <i class="fa-solid fa-arrow-right"></i></a>
+              <a href="#" class="btn-secondary">Download CV <i class="fa-solid fa-download"></i></a>
+            </div>
+
+            <div class="hero__socials">
+              <a href="https://github.com/abdulllrahmandev" target="_blank" aria-label="GitHub"><i
+                  class="fa-brands fa-github"></i></a>
+              <a href="https://www.linkedin.com/in/abdulrahmanhusseiin/" target="_blank" aria-label="LinkedIn"><i
+                  class="fa-brands fa-linkedin"></i></a>
+              <a href="https://wa.me/201062120142" target="_blank" aria-label="WhatsApp"><i
+                  class="fa-brands fa-whatsapp"></i></a>
+            </div>
+          </div>
+          <div class="hero__image fade-in">
+            <div class="image-stack">
+              <div class="card-float"><i class="fa-solid fa-code"></i><span>Web</span></div>
+              <div class="card-float"><i class="fa-solid fa-mobile-screen"></i><span>Mobile</span></div>
+              <div class="card-float"><i class="fa-solid fa-desktop"></i><span>Desktop</span></div>
+              <img src="assets/home.svg" alt="Abdulrahman Illustration">
+            </div>
           </div>
         </div>
       </div>
-      <div class="footer__bottom">
-        <p>&copy; 2026 Abdulrahman Hussein. All rights reserved.</p>
+    </section>
+
+    <!-- ABOUT ME SECTION -->
+    <section class="about" id="about">
+      <div class="bg-grid"></div>
+      <div class="container">
+        <div class="about__inner fade-in">
+          <div class="about__content">
+            <span class="section-tag">About Me</span>
+            <h2 class="about__heading">Building Meaningful <strong>Digital Experiences</strong></h2>
+            <div class="about__text">
+              <p>I am a versatile Software Developer passionate about building robust, scalable applications for
+                Android, Windows, and the Web. My journey is driven by a deep curiosity for architecture and a
+                commitment to crafting high-quality software that bridges the gap between different platforms.</p>
+              <p>Whether it's architecting a complex Desktop environment, developing a fluid Mobile UI, or engineering a
+                modern Web app, I focus on writing clean, maintainable code and delivering user-centered designs.</p>
+            </div>
+            <div class="about__stats">
+              <div class="stat-item">
+                <h3>10+</h3>
+                <p>Projects Built</p>
+              </div>
+              <div class="stat-item">
+                <h3>3+</h3>
+                <p>Years Experience</p>
+              </div>
+            </div>
+          </div>
+          <div class="about__image">
+            <div class="image-wrapper">
+              <img src="assets/about.svg" alt="About Me">
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </footer>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section class="skills" id="skills">
+      <div class="bg-grid"></div>
+      <div class="container">
+        <div class="section-header fade-in">
+          <span class="section-tag">Skills</span>
+          <h2 class="section-title">My <strong>Tech Stack</strong></h2>
+        </div>
+        <div class="skills__grid fade-in">
+          <div class="skill-card"><i class="fa-brands fa-html5"></i><span>HTML5</span></div>
+          <div class="skill-card"><i class="fa-brands fa-css3-alt"></i><span>CSS3</span></div>
+          <div class="skill-card"><i class="fa-brands fa-js"></i><span>JavaScript</span></div>
+          <div class="skill-card"><img src="https://cdn.simpleicons.org/typescript/000000" alt="TypeScript"
+              width="32"><span>TypeScript</span></div>
+          <div class="skill-card"><img src="https://cdn.simpleicons.org/python/000000" alt="Python"
+              width="32"><span>Python</span></div>
+          <div class="skill-card"><i class="fa-brands fa-node-js"></i><span>Node.js</span></div>
+          <div class="skill-card"><img src="https://cdn.simpleicons.org/dart/000000" alt="Dart"
+              width="32"><span>Dart</span></div>
+          <div class="skill-card"><i class="fa-brands fa-react"></i><span>React</span></div>
+          <div class="skill-card"><img src="https://cdn.simpleicons.org/electron/000000" alt="Electron"
+              width="32"><span>Electron</span></div>
+          <div class="skill-card"><img src="https://cdn.simpleicons.org/flutter/000000" alt="Flutter"
+              width="32"><span>Flutter</span></div>
+          <div class="skill-card"><i class="fa-brands fa-git-alt"></i><span>Git</span></div>
+          <div class="skill-card"><i class="fa-solid fa-database"></i><span>SQL</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section class="projects" id="projects">
+      <div class="bg-grid"></div>
+      <div class="container">
+        <div class="section-header fade-in">
+          <span class="section-tag">Portfolio</span>
+          <h2 class="section-title">Featured <strong>Projects</strong></h2>
+        </div>
+
+        <div class="projects__grid">
+          <!-- Project 1 -->
+          <div class="project-card fade-in">
+            <div class="project-card__image">
+              <img src="assets/mobilestore.png" alt="Mobile Store">
+            </div>
+            <div class="project-card__content">
+              <h3>Mobile Store</h3>
+              <p>A high-performance e-commerce platform specializing in smartphones with full bilingual support.</p>
+              <div class="project-tags">
+                <span>HTML5</span><span>CSS3</span><span>JS</span>
+              </div>
+              <div class="project-links">
+                <a href="#"><i class="fa-brands fa-github"></i></a>
+                <a href="#"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+              </div>
+            </div>
+          </div>
+
+
+
+          <!-- Project 3 -->
+          <div class="project-card fade-in">
+            <div class="project-card__image">
+              <img src="assets/Accurate.png" alt="Productivity Suite">
+            </div>
+            <div class="project-card__content">
+              <h3>Accurate Productivity</h3>
+              <p>A premium desktop productivity suite with Pomodoro planner and task management.</p>
+              <div class="project-tags">
+                <span>React</span><span>TS</span><span>Electron</span>
+              </div>
+              <div class="project-links">
+                <a href="#"><i class="fa-brands fa-github"></i></a>
+                <a href="#"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 4 -->
+          <div class="project-card fade-in">
+            <div class="project-card__image">
+              <img src="assets/managerdesktop.png" alt="Archiva">
+            </div>
+            <div class="project-card__content">
+              <h3>Archiva</h3>
+              <p>AI-driven document management system with automatic metadata extraction via LLMs.</p>
+              <div class="project-tags">
+                <span>Electron</span><span>Python</span><span>AI</span>
+              </div>
+              <div class="project-links">
+                <a href="#"><i class="fa-brands fa-github"></i></a>
+                <a href="#"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 5 -->
+          <div class="project-card fade-in">
+            <div class="project-card__image">
+              <img src="assets/khoshou.png" alt="Khoshou App">
+            </div>
+            <div class="project-card__content">
+              <h3>Khoshou App</h3>
+              <p>A comprehensive Islamic spiritual companion app designed for tranquility and devotion.</p>
+              <div class="project-tags">
+                <span>Flutter</span><span>Dart</span><span>API</span>
+              </div>
+              <div class="project-links">
+                <a href="#"><i class="fa-brands fa-github"></i></a>
+                <a href="#"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="contact" id="contact">
+      <div class="bg-grid"></div>
+      <div class="container">
+        <div class="contact__inner fade-in">
+          <div class="contact__info">
+            <span class="section-tag">Contact</span>
+            <h2 class="section-title">Let's <strong>Collaborate</strong></h2>
+            <p>I'm always open to discuss exciting projects and new opportunities. Let's build something amazing
+              together!</p>
+
+            <div class="contact-details">
+              <div class="detail-item">
+                <i class="fa-solid fa-envelope"></i>
+                <div>
+                  <h4>Email</h4>
+                  <p>abdulllrahman.dev@gmail.com</p>
+                </div>
+              </div>
+              <div class="detail-item">
+                <i class="fa-solid fa-phone"></i>
+                <div>
+                  <h4>Phone</h4>
+                  <p>+20 106 212 0142</p>
+                </div>
+              </div>
+              <div class="detail-item">
+                <i class="fa-solid fa-location-dot"></i>
+                <div>
+                  <h4>Location</h4>
+                  <p>Cairo, Egypt</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact__form">
+            <form id="contact-form">
+              <div class="form-row">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+              </div>
+              <input type="text" placeholder="Subject">
+              <textarea placeholder="How can I help you?" rows="5" required></textarea>
+              <button type="submit" class="btn-primary">Send Message</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__inner">
+          <div class="footer__brand">
+            <a href="#" class="navbar__logo">
+              <span>Abdulrahman</span>
+            </a>
+            <p>Multi-Platform Developer crafting premium digital experiences.</p>
+          </div>
+          <div class="footer__links">
+            <h4>Navigation</h4>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+          </div>
+          <div class="footer__socials">
+            <h4>Follow Me</h4>
+            <div class="social-icons">
+              <a href="https://github.com/abdulllrahmandev" target="_blank"><i class="fa-brands fa-github"></i></a>
+              <a href="https://www.linkedin.com/in/abdulrahmanhusseiin/" target="_blank"><i
+                  class="fa-brands fa-linkedin"></i></a>
+              <a href="https://wa.me/201062120142" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="footer__bottom">
+          <p>&copy; 2026 Abdulrahman Hussein. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
 
   </div> <!-- End of main-content -->
 
@@ -417,7 +435,7 @@
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
     document.querySelectorAll('.navbar__links a, .navbar__mobile a, .navbar__logo').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
+      anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const targetAttr = this.getAttribute('href');
         if (targetAttr === '#') {
@@ -445,4 +463,5 @@
     });
   </script>
 </body>
+
 </html>

@@ -938,7 +938,10 @@ textarea:focus {
 
 .auth-page {
   position: fixed;
-  top: 0; left: 0; width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background: var(--color-white);
   z-index: 9999;
   display: flex;
@@ -958,11 +961,21 @@ textarea:focus {
   border-radius: var(--radius-lg);
   display: flex;
   overflow: hidden;
-  box-shadow: 20px 20px 0 rgba(0,0,0,0.05);
+  box-shadow: 20px 20px 0 rgba(0, 0, 0, 0.05);
   position: relative;
 }
 
-.auth-page__left, .auth-page__right {
+.auth-page__card::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0; left: 50%;
+  width: 2px;
+  background: var(--color-black);
+  z-index: 10;
+}
+
+.auth-page__left,
+.auth-page__right {
   width: 50%;
   transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
@@ -982,22 +995,6 @@ textarea:focus {
   z-index: 2;
 }
 
-.auth-page__right {
-  background: var(--color-gray-100);
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 40px;
-  border-left: var(--border);
-  z-index: 1;
-}
-
-.auth-page__card.signup-mode .auth-page__right {
-  border-left: none;
-  border-right: var(--border);
-}
-
 .auth-page__logo {
   display: flex;
   align-items: center;
@@ -1007,43 +1004,68 @@ textarea:focus {
   margin-bottom: 40px;
 }
 
+.logo-box {
+  background: var(--color-black);
+  color: var(--color-white);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+}
+
 .auth-header h1 {
-  font-size: 2rem;
-  margin-bottom: 8px;
+  font-size: 2.2rem;
+  margin-bottom: 12px;
 }
 
 .auth-header p {
   color: var(--color-gray-600);
   margin-bottom: 32px;
-  font-size: 0.95rem;
+  font-size: 1rem;
 }
 
 .auth-tabs {
   display: flex;
-  gap: 24px;
   margin-bottom: 32px;
   border-bottom: 1px solid var(--color-gray-200);
+  position: relative;
 }
 
 .auth-tab {
+  flex: 1;
   background: none;
   border: none;
-  padding: 10px 0;
+  padding: 12px 0;
   font-weight: 700;
   color: var(--color-gray-600);
-  position: relative;
   cursor: pointer;
+  font-family: var(--font-main);
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+  z-index: 2;
 }
 
 .auth-tab.active {
   color: var(--color-black);
 }
 
-.auth-tab.active::after {
+/* Professional Sliding Indicator */
+.auth-tabs::after {
   content: '';
   position: absolute;
-  bottom: -1px; left: 0; width: 100%; height: 2px;
+  bottom: -1px;
+  left: 0;
+  width: 50%;
+  height: 2px;
   background: var(--color-black);
+  transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  z-index: 3;
+}
+
+.auth-page__card.signup-mode .auth-tabs::after {
+  transform: translateX(100%);
 }
 
 .auth-form {
@@ -1057,11 +1079,13 @@ textarea:focus {
 }
 
 .auth-form input {
-  padding: 14px;
+  padding: 16px;
   border: var(--border);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-md);
   font-family: var(--font-body);
+  font-size: 1rem;
   outline: none;
+  transition: background 0.3s ease;
 }
 
 .auth-form input:focus {
@@ -1069,11 +1093,11 @@ textarea:focus {
 }
 
 .auth-message {
-  padding: 12px;
-  border-radius: var(--radius-sm);
-  font-size: 0.85rem;
+  padding: 14px;
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
   font-weight: 600;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   display: none;
 }
 
@@ -1091,11 +1115,30 @@ textarea:focus {
   display: block;
 }
 
+.auth-page__right {
+  background: #f8f8f8;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  z-index: 1;
+}
+
+.auth-illustration {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 .auth-illustration img {
   width: 100%;
-  max-width: 300px;
-  filter: grayscale(1);
-  transition: transform 0.6s ease;
+  max-width: 420px;
+  height: auto;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 .auth-page__card.signup-mode .auth-illustration img {
@@ -1104,12 +1147,23 @@ textarea:focus {
 
 @media (max-width: 768px) {
   .auth-page__card {
-    grid-template-columns: 1fr;
+    flex-direction: column;
   }
+
+  .auth-page__left,
+  .auth-page__right {
+    width: 100%;
+  }
+
   .auth-page__right {
     display: none;
   }
+
   .auth-page__left {
-    padding: 40px 20px;
+    padding: 40px 24px;
+  }
+
+  .auth-header h1 {
+    font-size: 1.8rem;
   }
 }
