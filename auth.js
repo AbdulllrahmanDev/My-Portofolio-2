@@ -221,14 +221,14 @@ function updateAuthUI() {
 
   if (currentUser) {
     const firstName = currentUser.name.split(' ')[0];
-    const uiContent = `👤 ${firstName}`;
+    const uiContent = `<i class="fa-solid fa-user" style="font-size:0.85rem;"></i> ${firstName}`;
     
     if (loginBtn) {
-      loginBtn.innerText = uiContent;
+      loginBtn.innerHTML = uiContent;
       loginBtn.onclick = handleLogout;
     }
     if (mobileLoginBtn) {
-      mobileLoginBtn.innerText = uiContent;
+      mobileLoginBtn.innerHTML = uiContent;
       mobileLoginBtn.onclick = handleLogout;
     }
   }

@@ -305,13 +305,16 @@ button {
 
 .btn-primary,
 .btn-secondary {
-  padding: 14px 28px;
+  padding: 10px 32px;
   border: var(--border);
   border-radius: var(--radius-sm);
   font-weight: 700;
   display: flex;
   align-items: center;
   gap: 10px;
+  white-space: nowrap;
+  min-width: 160px;
+  justify-content: center;
 }
 
 .btn-primary {
@@ -1042,7 +1045,6 @@ textarea:focus {
   color: var(--color-black);
 }
 
-/* Professional Sliding Indicator */
 .auth-tabs::after {
   content: '';
   position: absolute;
