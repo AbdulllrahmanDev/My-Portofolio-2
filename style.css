@@ -1,5 +1,4 @@
 /* ============================================================
-   CLEAN MONOCHROMATIC PORTFOLIO
    Owner: Abdulrahman Hussein
    Theme: Minimalist Black & White
    ============================================================ */
@@ -22,7 +21,6 @@
   --transition: 0.25s ease;
 }
 
-/* ---------- Reset & Base ---------- */
 *,
 *::before,
 *::after {
@@ -42,7 +40,6 @@ body {
   line-height: 1.6;
 }
 
-/* Background Grid Pattern */
 .bg-grid {
   position: absolute;
   top: 0;
@@ -193,7 +190,6 @@ button {
   color: var(--color-black);
 }
 
-/* Hamburger */
 .navbar__toggle {
   display: none;
   flex-direction: column;
@@ -305,7 +301,7 @@ button {
 
 .btn-primary,
 .btn-secondary {
-  padding: 10px 32px;
+  padding: 10px 40px;
   border: var(--border);
   border-radius: var(--radius-sm);
   font-weight: 700;

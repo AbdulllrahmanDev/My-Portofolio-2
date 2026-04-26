@@ -1,13 +1,11 @@
-// Database / LocalStorage keys
+// Database
 const USERS_KEY = 'portfolio_users';
 const CURRENT_USER_KEY = 'currentUser';
 
-// Initialize DB if empty
 if (!localStorage.getItem(USERS_KEY)) {
   localStorage.setItem(USERS_KEY, JSON.stringify([]));
 }
 
-// Validation Rules from Main Site
 function validateEmailRules(email) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
@@ -37,7 +35,6 @@ function validateEmailRules(email) {
   return { isValid: true, msg: "" };
 }
 
-// Real-time Input Validation
 function validateInput(inputElement) {
   const id = inputElement.id;
   const value = inputElement.value.trim();
@@ -46,7 +43,6 @@ function validateInput(inputElement) {
   let msg = '';
 
   if (value === '') {
-    // Optional: could show "Required" or just clear error on empty
     isValid = true; 
     msg = '';
   } else if (id.includes('email')) {
@@ -97,24 +93,20 @@ function switchTab(tab) {
     card.classList.remove('signup-mode');
   }
 
-  // Update Tabs
   document.getElementById('tab-login').classList.remove('active');
   document.getElementById('tab-signup').classList.remove('active');
   document.getElementById(`tab-${tab}`).classList.add('active');
 
-  // Update Forms
   document.getElementById('form-login').classList.remove('active');
   document.getElementById('form-signup').classList.remove('active');
   document.getElementById(`form-${tab}`).classList.add('active');
 
-  // Clear messages
   const msgDiv = document.getElementById('auth-msg');
   if (msgDiv) {
     msgDiv.className = 'auth-message';
     msgDiv.style.display = 'none';
   }
   
-  // Update header text dynamically
   const headerTitle = document.querySelector('.auth-header h1');
   const headerDesc = document.querySelector('.auth-header p');
   
@@ -139,7 +131,6 @@ function handleSignup(event) {
   const isPasswordValid = validateInput(passwordInput) && passwordInput.value !== '';
 
   if (!isNameValid || !isEmailValid || !isPasswordValid) {
-    // Errors are already shown inline by validateInput
     return;
   }
 
@@ -210,7 +201,6 @@ function revealPortfolio() {
   if (mainContent) mainContent.style.display = 'block';
   document.body.classList.remove('auth-locked');
   
-  // Re-initialize any components if needed
   updateAuthUI();
 }
 
@@ -242,7 +232,6 @@ function handleLogout(e) {
   }
 }
 
-// Initial Load
 window.addEventListener('DOMContentLoaded', () => {
   const currentUser = JSON.parse(localStorage.getItem(CURRENT_USER_KEY));
   if (currentUser) {
