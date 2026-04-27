@@ -1410,6 +1410,85 @@ textarea:focus {
   }
 }
 
+/* ============================================================
+   LIVE NOTIFICATION
+   ============================================================ */
+.live-notification {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: var(--color-black);
+  color: var(--color-white);
+  padding: 16px 24px;
+  border-radius: var(--radius-md);
+  border: 2px solid var(--color-white);
+  box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  z-index: 9999;
+  transform: translateX(150%);
+  transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  max-width: 400px;
+  width: calc(100% - 60px);
+}
+
+.live-notification.active {
+  transform: translateX(0);
+}
+
+.live-notification__icon {
+  width: 44px;
+  height: 44px;
+  background: var(--color-white);
+  color: var(--color-black);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.live-notification__content {
+  flex: 1;
+}
+
+.live-notification__content h4 {
+  font-size: 0.95rem;
+  margin-bottom: 2px;
+  font-weight: 800;
+}
+
+.live-notification__content p {
+  font-size: 0.8rem;
+  opacity: 0.8;
+  line-height: 1.4;
+}
+
+.live-notification__close {
+  background: none;
+  border: none;
+  color: var(--color-white);
+  font-size: 1.2rem;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+  padding: 5px;
+}
+
+.live-notification__close:hover {
+  opacity: 1;
+}
+
+@media (max-width: 500px) {
+  .live-notification {
+    bottom: 20px;
+    right: 20px;
+    width: calc(100% - 40px);
+    padding: 12px 16px;
+  }
+}
+
 @media (max-width: 768px) {
   .auth-page__card {
     flex-direction: column;
