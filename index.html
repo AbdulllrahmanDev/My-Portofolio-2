@@ -239,13 +239,11 @@
                 <span>HTML5</span><span>CSS3</span><span>JS</span>
               </div>
               <div class="project-links">
-                <a href="#"><i class="fa-brands fa-github"></i></a>
-                <a href="#"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                <a href="javascript:void(0)" onclick="handleProjectLink('https://github.com/AbdulllrahmanDev/Moblie-Store', 'Mobile Store', 'github'); return false;"><i class="fa-brands fa-github"></i></a>
+                <a href="javascript:void(0)" onclick="handleProjectLink('https://abdulllrahmandev.github.io/Moblie-Store/', 'Mobile Store', 'demo'); return false;"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
               </div>
             </div>
           </div>
-
-
 
           <!-- Project 2 -->
           <div class="project-card fade-in">
@@ -259,8 +257,8 @@
                 <span>React</span><span>TS</span><span>Electron</span>
               </div>
               <div class="project-links">
-                <a href="#"><i class="fa-brands fa-github"></i></a>
-                <a href="#"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                <a href="javascript:void(0)" onclick="handleProjectLink('#', 'Accurate Productivity', 'github'); return false;"><i class="fa-brands fa-github"></i></a>
+                <a href="javascript:void(0)" onclick="handleProjectLink('#', 'Accurate Productivity', 'demo'); return false;"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
               </div>
             </div>
           </div>
@@ -277,8 +275,8 @@
                 <span>Electron</span><span>Python</span><span>AI</span>
               </div>
               <div class="project-links">
-                <a href="#"><i class="fa-brands fa-github"></i></a>
-                <a href="#"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                <a href="javascript:void(0)" onclick="handleProjectLink('#', 'Archiva', 'github'); return false;"><i class="fa-brands fa-github"></i></a>
+                <a href="javascript:void(0)" onclick="handleProjectLink('#', 'Archiva', 'demo'); return false;"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
               </div>
             </div>
           </div>
@@ -295,8 +293,8 @@
                 <span>Flutter</span><span>Dart</span><span>API</span>
               </div>
               <div class="project-links">
-                <a href="#"><i class="fa-brands fa-github"></i></a>
-                <a href="#"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                <a href="javascript:void(0)" onclick="handleProjectLink('#', 'Khoshou App', 'github'); return false;"><i class="fa-brands fa-github"></i></a>
+                <a href="javascript:void(0)" onclick="handleProjectLink('#', 'Khoshou App', 'demo'); return false;"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
               </div>
             </div>
           </div>
@@ -308,13 +306,14 @@
     <section class="contact" id="contact">
       <div class="bg-grid"></div>
       <div class="container">
-        <div class="contact__inner fade-in">
-          <div class="contact__info">
-            <span class="section-tag">Contact</span>
-            <h2 class="section-title">Let's <strong>Collaborate</strong></h2>
-            <p>I'm always open to discuss exciting projects and new opportunities. Let's build something amazing
-              together!</p>
+        <div class="contact__header fade-in">
+          <span class="section-tag">Contact</span>
+          <h2 class="section-title">Let's <strong>Collaborate</strong></h2>
+          <p class="contact__desc">I'm always open to discuss exciting projects and new opportunities. Let's build something amazing together!</p>
+        </div>
 
+        <div class="contact__content fade-in">
+          <div class="contact__details-sidebar">
             <div class="contact-details">
               <div class="detail-item">
                 <i class="fa-solid fa-envelope"></i>
@@ -340,7 +339,7 @@
             </div>
           </div>
 
-          <div class="contact__form">
+          <div class="contact__form-wrapper">
             <form id="contact-form">
               <div class="form-row">
                 <input type="text" placeholder="Your Name" required>
@@ -393,6 +392,46 @@
   <button class="scroll-top" id="scroll-top">
     <i class="fa-solid fa-arrow-up"></i>
   </button>
+
+  <!-- PROJECT PREVIEW MODAL -->
+  <div id="preview-modal" class="preview-modal">
+    <div class="preview-modal__container">
+      <div class="preview-modal__header">
+        <h3 class="preview-modal__title" id="preview-title">Project Preview</h3>
+        <button class="preview-modal__close" onclick="closePreviewModal()">&times;</button>
+      </div>
+      <div class="preview-modal__body">
+        <iframe id="preview-iframe" src=""></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRIVATE PROJECT MODAL -->
+  <div id="private-modal" class="custom-modal">
+    <div class="custom-modal__content">
+      <div class="private-icon">
+        <i class="fa-solid fa-lock"></i>
+      </div>
+      <h3 class="custom-modal__title">Private Project</h3>
+      <p class="custom-modal__message">
+        This project is currently private and its links are not available to the public.
+      </p>
+      <div class="custom-modal__btns">
+        <button class="btn-primary" style="width: 100%;" onclick="closePrivateModal()">Understood</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="custom-confirm" class="custom-modal">
+    <div class="custom-modal__content">
+      <h3 class="custom-modal__title">Confirm Logout</h3>
+      <p class="custom-modal__message">Are you sure you want to log out of your session?</p>
+      <div class="custom-modal__btns">
+        <button class="btn-secondary" onclick="closeConfirmModal()">Cancel</button>
+        <button class="btn-primary" onclick="executeLogout()">Logout</button>
+      </div>
+    </div>
+  </div>
 
   <script src="auth.js"></script>
   <script>
@@ -466,6 +505,64 @@
     scrollTopBtn.addEventListener('click', () => {
       lenis.scrollTo(0);
     });
+
+    // Handle Project Links (Private Projects)
+    document.querySelectorAll('.project-links a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href === '#' || href === '' || href === 'javascript:void(0)') {
+          e.preventDefault();
+          openPrivateModal();
+        }
+      });
+    });
+
+    function openPrivateModal() {
+      const modal = document.getElementById('private-modal');
+      if (modal) modal.classList.add('active');
+    }
+
+    function closePrivateModal() {
+      const modal = document.getElementById('private-modal');
+      if (modal) modal.classList.remove('active');
+    }
+
+    // Project Preview & Link Handling
+    function handleProjectLink(url, title, type) {
+      if (!url || url === '#' || url === 'javascript:void(0)') {
+        openPrivateModal();
+        return;
+      }
+
+      if (type === 'github') {
+        window.open(url, '_blank');
+      } else if (type === 'demo') {
+        openPreviewModal(url, title);
+      }
+    }
+
+    function openPreviewModal(url, title) {
+      const modal = document.getElementById('preview-modal');
+      const iframe = document.getElementById('preview-iframe');
+      const titleEl = document.getElementById('preview-title');
+      
+      if (modal && iframe && titleEl) {
+        iframe.src = url;
+        titleEl.textContent = title + ' - Live Preview';
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+      }
+    }
+
+    function closePreviewModal() {
+      const modal = document.getElementById('preview-modal');
+      const iframe = document.getElementById('preview-iframe');
+      if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = ''; // Restore scrolling
+      }
+      if (iframe) iframe.src = '';
+    }
   </script>
 </body>
 

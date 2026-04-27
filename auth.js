@@ -225,11 +225,19 @@ function updateAuthUI() {
 }
 
 function handleLogout(e) {
-  e.stopPropagation();
-  if (confirm('Are you sure you want to log out?')) {
-    localStorage.removeItem(CURRENT_USER_KEY);
-    window.location.reload();
-  }
+  if (e) e.stopPropagation();
+  const modal = document.getElementById('custom-confirm');
+  if (modal) modal.classList.add('active');
+}
+
+function closeConfirmModal() {
+  const modal = document.getElementById('custom-confirm');
+  if (modal) modal.classList.remove('active');
+}
+
+function executeLogout() {
+  localStorage.removeItem(CURRENT_USER_KEY);
+  window.location.reload();
 }
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -242,3 +250,55 @@ window.addEventListener('DOMContentLoaded', () => {
     document.body.classList.add('auth-locked');
   }
 });
+
+/* ============================================================
+   PROJECT LINK HANDLING & MODALS
+   ============================================================ */
+function handleProjectLink(url, title, type) {
+  // Explicitly handle project behavior by name
+  if (title === 'Mobile Store') {
+    if (type === 'demo') {
+      openPreviewModal(url, title);
+    } else {
+      window.open(url, '_blank');
+    }
+  } else {
+    // For Accurate Productivity, Archiva, and Khoshou App
+    showPrivateModal();
+  }
+  return false;
+}
+
+function openPreviewModal(url, title) {
+  const modal = document.getElementById('preview-modal');
+  const iframe = document.getElementById('preview-iframe');
+  const titleEl = document.getElementById('preview-title');
+
+  if (modal && iframe && titleEl) {
+    titleEl.textContent = title + " | Live Demo";
+    iframe.src = url;
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden'; // Prevent scrolling
+  }
+}
+
+function closePreviewModal() {
+  const modal = document.getElementById('preview-modal');
+  const iframe = document.getElementById('preview-iframe');
+
+  if (modal && iframe) {
+    modal.classList.remove('active');
+    iframe.src = ''; // Stop the iframe content
+    document.body.style.overflow = ''; // Restore scrolling
+  }
+}
+
+function showPrivateModal() {
+  const modal = document.getElementById('private-modal');
+  if (modal) modal.classList.add('active');
+}
+
+function closePrivateModal() {
+  const modal = document.getElementById('private-modal');
+  if (modal) modal.classList.remove('active');
+}
