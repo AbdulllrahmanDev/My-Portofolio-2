@@ -239,8 +239,8 @@
                 <span>HTML5</span><span>CSS3</span><span>JS</span>
               </div>
               <div class="project-links">
-                <a href="javascript:void(0)" onclick="handleProjectLink('https://github.com/AbdulllrahmanDev/Moblie-Store', 'Mobile Store', 'github'); return false;"><i class="fa-brands fa-github"></i></a>
-                <a href="javascript:void(0)" onclick="handleProjectLink('https://abdulllrahmandev.github.io/Moblie-Store/', 'Mobile Store', 'demo'); return false;"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                <a href="javascript:void(0)" onclick="handleProjectLink(event, 'https://github.com/AbdulllrahmanDev/Moblie-Store', 'Mobile Store', 'github'); return false;"><i class="fa-brands fa-github"></i></a>
+                <a href="javascript:void(0)" onclick="handleProjectLink(event, 'https://abdulllrahmandev.github.io/Moblie-Store/', 'Mobile Store', 'demo'); return false;"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
               </div>
             </div>
           </div>
@@ -257,8 +257,8 @@
                 <span>React</span><span>TS</span><span>Electron</span>
               </div>
               <div class="project-links">
-                <a href="javascript:void(0)" onclick="handleProjectLink('#', 'Accurate Productivity', 'github'); return false;"><i class="fa-brands fa-github"></i></a>
-                <a href="javascript:void(0)" onclick="handleProjectLink('#', 'Accurate Productivity', 'demo'); return false;"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                <a href="javascript:void(0)" onclick="handleProjectLink(event, '#', 'Accurate Productivity', 'github'); return false;"><i class="fa-brands fa-github"></i></a>
+                <a href="javascript:void(0)" onclick="handleProjectLink(event, '#', 'Accurate Productivity', 'demo'); return false;"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
               </div>
             </div>
           </div>
@@ -275,8 +275,8 @@
                 <span>Electron</span><span>Python</span><span>AI</span>
               </div>
               <div class="project-links">
-                <a href="javascript:void(0)" onclick="handleProjectLink('#', 'Archiva', 'github'); return false;"><i class="fa-brands fa-github"></i></a>
-                <a href="javascript:void(0)" onclick="handleProjectLink('#', 'Archiva', 'demo'); return false;"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                <a href="javascript:void(0)" onclick="handleProjectLink(event, '#', 'Archiva', 'github'); return false;"><i class="fa-brands fa-github"></i></a>
+                <a href="javascript:void(0)" onclick="handleProjectLink(event, '#', 'Archiva', 'demo'); return false;"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
               </div>
             </div>
           </div>
@@ -293,8 +293,8 @@
                 <span>Flutter</span><span>Dart</span><span>API</span>
               </div>
               <div class="project-links">
-                <a href="javascript:void(0)" onclick="handleProjectLink('#', 'Khoshou App', 'github'); return false;"><i class="fa-brands fa-github"></i></a>
-                <a href="javascript:void(0)" onclick="handleProjectLink('#', 'Khoshou App', 'demo'); return false;"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                <a href="javascript:void(0)" onclick="handleProjectLink(event, '#', 'Khoshou App', 'github'); return false;"><i class="fa-brands fa-github"></i></a>
+                <a href="javascript:void(0)" onclick="handleProjectLink(event, '#', 'Khoshou App', 'demo'); return false;"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
               </div>
             </div>
           </div>
@@ -406,20 +406,18 @@
     </div>
   </div>
 
-  <!-- PRIVATE PROJECT MODAL -->
-  <div id="private-modal" class="custom-modal">
-    <div class="custom-modal__content">
-      <div class="private-icon">
-        <i class="fa-solid fa-lock"></i>
-      </div>
-      <h3 class="custom-modal__title">Private Project</h3>
-      <p class="custom-modal__message">
-        This project is currently private and its links are not available to the public.
-      </p>
-      <div class="custom-modal__btns">
-        <button class="btn-primary" style="width: 100%;" onclick="closePrivateModal()">Understood</button>
-      </div>
+  <!-- LIVE NOTIFICATION -->
+  <div id="live-notification" class="live-notification">
+    <div class="live-notification__icon">
+      <i class="fa-solid fa-lock"></i>
     </div>
+    <div class="live-notification__content">
+      <h4 id="notification-title">Private Project | مشروع خاص</h4>
+      <p id="notification-message">This project is currently private and restricted. | هذا المشروع خاص حالياً.</p>
+    </div>
+    <button class="live-notification__close" onclick="closeNotification()">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
   </div>
 
   <div id="custom-confirm" class="custom-modal">
@@ -434,136 +432,7 @@
   </div>
 
   <script src="auth.js"></script>
-  <script>
-    const lenis = new Lenis({
-      lerp: 0.5,
-      wheelMultiplier: 1,
-      gestureOrientation: 'vertical',
-      normalizeWheel: true,
-      smoothWheel: true
-    });
-
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-
-    requestAnimationFrame(raf);
-
-    const navToggle = document.getElementById('nav-toggle');
-    const navMobile = document.getElementById('nav-mobile');
-    navToggle.addEventListener('click', () => {
-      navToggle.classList.toggle('open');
-      navMobile.classList.toggle('open');
-    });
-
-    document.querySelectorAll('.navbar__mobile a').forEach(link => {
-      link.addEventListener('click', () => {
-        navToggle.classList.remove('open');
-        navMobile.classList.remove('open');
-      });
-    });
-
-    const observerOptions = {
-      threshold: 0.1
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, observerOptions);
-
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-    document.querySelectorAll('.navbar__links a, .navbar__mobile a, .navbar__logo').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const targetAttr = this.getAttribute('href');
-        if (targetAttr === '#') {
-          lenis.scrollTo(0);
-        } else {
-          const targetEl = document.querySelector(targetAttr);
-          if (targetEl) {
-            lenis.scrollTo(targetEl, { offset: 0 });
-          }
-        }
-      });
-    });
-
-    const scrollTopBtn = document.getElementById('scroll-top');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 500) {
-        scrollTopBtn.classList.add('visible');
-      } else {
-        scrollTopBtn.classList.remove('visible');
-      }
-    });
-
-    scrollTopBtn.addEventListener('click', () => {
-      lenis.scrollTo(0);
-    });
-
-    // Handle Project Links (Private Projects)
-    document.querySelectorAll('.project-links a').forEach(link => {
-      link.addEventListener('click', function(e) {
-        const href = this.getAttribute('href');
-        if (href === '#' || href === '' || href === 'javascript:void(0)') {
-          e.preventDefault();
-          openPrivateModal();
-        }
-      });
-    });
-
-    function openPrivateModal() {
-      const modal = document.getElementById('private-modal');
-      if (modal) modal.classList.add('active');
-    }
-
-    function closePrivateModal() {
-      const modal = document.getElementById('private-modal');
-      if (modal) modal.classList.remove('active');
-    }
-
-    // Project Preview & Link Handling
-    function handleProjectLink(url, title, type) {
-      if (!url || url === '#' || url === 'javascript:void(0)') {
-        openPrivateModal();
-        return;
-      }
-
-      if (type === 'github') {
-        window.open(url, '_blank');
-      } else if (type === 'demo') {
-        openPreviewModal(url, title);
-      }
-    }
-
-    function openPreviewModal(url, title) {
-      const modal = document.getElementById('preview-modal');
-      const iframe = document.getElementById('preview-iframe');
-      const titleEl = document.getElementById('preview-title');
-      
-      if (modal && iframe && titleEl) {
-        iframe.src = url;
-        titleEl.textContent = title + ' - Live Preview';
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden'; // Prevent background scrolling
-      }
-    }
-
-    function closePreviewModal() {
-      const modal = document.getElementById('preview-modal');
-      const iframe = document.getElementById('preview-iframe');
-      if (modal) {
-        modal.classList.remove('active');
-        document.body.style.overflow = ''; // Restore scrolling
-      }
-      if (iframe) iframe.src = '';
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 
 </html>
