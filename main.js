@@ -1,4 +1,3 @@
-// Database
 const USERS_KEY = 'portfolio_users';
 const CURRENT_USER_KEY = 'currentUser';
 
@@ -262,7 +261,6 @@ window.addEventListener('DOMContentLoaded', () => {
    ============================================================ */
 function handleProjectLink(event, url, title, type) {
   if (event) event.preventDefault();
-  // Explicitly handle project behavior by name
   if (title === 'Mobile Store') {
     if (type === 'demo') {
       openPreviewModal(url, title);
@@ -270,7 +268,6 @@ function handleProjectLink(event, url, title, type) {
       window.open(url, '_blank');
     }
   } else {
-    // For Accurate Productivity, Archiva, and Khoshou App
     showPrivateModal();
   }
   return false;
@@ -285,7 +282,7 @@ function openPreviewModal(url, title) {
     titleEl.textContent = title + " | Live Demo";
     iframe.src = url;
     modal.classList.add('active');
-    document.body.style.overflow = 'hidden'; // Prevent scrolling
+    document.body.style.overflow = 'hidden'; 
   }
 }
 
@@ -295,8 +292,8 @@ function closePreviewModal() {
 
   if (modal && iframe) {
     modal.classList.remove('active');
-    iframe.src = ''; // Stop the iframe content
-    document.body.style.overflow = ''; // Restore scrolling
+    iframe.src = ''; 
+    document.body.style.overflow = ''; 
   }
 }
 
@@ -327,7 +324,6 @@ function raf(time) {
 }
 requestAnimationFrame(raf);
 
-// Navbar Mobile Toggle
 const navToggle = document.getElementById('nav-toggle');
 const navMobile = document.getElementById('nav-mobile');
 if (navToggle && navMobile) {
@@ -344,7 +340,6 @@ if (navToggle && navMobile) {
   });
 }
 
-// Fade-in animations on scroll
 const observerOptions = { threshold: 0.1 };
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -355,7 +350,6 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-// Smooth scroll for nav links
 document.querySelectorAll('.navbar__links a, .navbar__mobile a, .navbar__logo').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
     e.preventDefault();
@@ -371,7 +365,6 @@ document.querySelectorAll('.navbar__links a, .navbar__mobile a, .navbar__logo').
   });
 });
 
-// Scroll to top button
 const scrollTopBtn = document.getElementById('scroll-top');
 if (scrollTopBtn) {
   window.addEventListener('scroll', () => {
@@ -387,7 +380,6 @@ if (scrollTopBtn) {
   });
 }
 
-// Handle Horizontal Scroll for About & Skills Zone (Two-Stage Animation)
 function handleHorizontalScroll() {
   const zone = document.getElementById('horizontal-zone');
   const track = document.getElementById('horizontal-track');
@@ -402,14 +394,12 @@ function handleHorizontalScroll() {
       const totalScrollHeight = rect.height - windowHeight;
       const currentScroll = -rect.top;
       
-      // Phase 1: Reveal Skills Section (0% to 25% of scroll)
       const phase1Duration = totalScrollHeight * 0.25; 
       if (currentScroll <= phase1Duration) {
         const progress1 = currentScroll / phase1Duration;
         track.style.transform = `translate3d(${-progress1 * 100}vw, 0, 0)`;
         skillsRow.style.transform = `translate3d(0, 0, 0)`;
       } 
-      // Phase 2: Scroll skills row (25% to 100% of scroll)
       else {
         track.style.transform = `translate3d(-100vw, 0, 0)`; 
         
@@ -418,8 +408,6 @@ function handleHorizontalScroll() {
         const progress2 = phase2Scroll / phase2Duration;
         
         const trackWidth = skillsRow.scrollWidth;
-        // Calculation: Total width minus half the window width to end in the center
-        // We also account for the initial padding/offset
         const maxMove = trackWidth - (windowWidth / 2); 
         
         skillsRow.style.transform = `translate3d(${-progress2 * maxMove}px, 0, 0)`;
@@ -428,7 +416,6 @@ function handleHorizontalScroll() {
       track.style.transform = `translate3d(0, 0, 0)`;
       skillsRow.style.transform = `translate3d(0, 0, 0)`;
     } else if (rect.bottom < windowHeight) {
-      // Ensure it stays at the end position when scrolled past
       const trackWidth = skillsRow.scrollWidth;
       const maxMove = trackWidth - (windowWidth / 2);
       track.style.transform = `translate3d(-100vw, 0, 0)`;
@@ -437,12 +424,28 @@ function handleHorizontalScroll() {
   }
 }
 
-// Optimized event listeners
 if (typeof lenis !== 'undefined') {
   lenis.on('scroll', handleHorizontalScroll);
 }
 window.addEventListener('scroll', handleHorizontalScroll);
 handleHorizontalScroll();
-
-
-ص
+document.querySelectorAll('a[href="#about"], a[href="#skills-sub"], a[href="#skills"]').forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    const targetId = link.getAttribute('href').substring(1);
+    const zone = document.getElementById('horizontal-zone');
+    
+    if (zone && typeof lenis !== 'undefined') {
+      const zoneTop = zone.offsetTop;
+      const windowHeight = window.innerHeight;
+      const totalScrollHeight = zone.offsetHeight - windowHeight;
+      
+      if (targetId === 'about') {
+        lenis.scrollTo(zoneTop, { duration: 1.2 });
+      } else if (targetId === 'skills-sub' || targetId === 'skills') {
+        const landingPoint = zoneTop + (totalScrollHeight * 0.25) + 5;
+        lenis.scrollTo(landingPoint, { duration: 1.2 });
+      }
+    }
+  });
+});

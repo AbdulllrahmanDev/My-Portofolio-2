@@ -556,7 +556,6 @@ button {
   height: 400vh;
   position: relative;
   background: var(--color-black);
-  /* Default fallback */
 }
 
 .horizontal-sticky {
@@ -588,12 +587,10 @@ button {
   position: relative;
   padding: 0 5%;
   overflow: hidden;
-  /* لمنع أي تداخل خارجي */
 }
 
 .about {
   background: #000 !important;
-  /* خلفية سوداء صلبة */
   color: var(--color-white);
   z-index: 1;
 }
@@ -608,7 +605,6 @@ button {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  /* ليكون العنوان والمهارات على نفس الخط يساراً */
   width: 100%;
 }
 
@@ -616,7 +612,6 @@ button {
   width: 100%;
   display: flex;
   justify-content: flex-start;
-  /* تبدأ المهارات من نفس بداية العنوان */
   margin-top: 50px;
 }
 
@@ -690,7 +685,6 @@ button {
 
 .skill-card i,
 .skill-card img {
-  /* الحجم القياسي لبقية المهارات */
   font-size: 3.2rem;
   width: 65px;
   height: 65px;
@@ -702,14 +696,12 @@ button {
   transition: all 0.4s ease;
 }
 
-/* تكبير خاص للثلاثة الأوائل (HTML, CSS, JS) */
 .icon-featured {
   font-size: 4.2rem !important;
   width: 85px !important;
   height: 85px !important;
 }
 
-/* تصغير خاص لأيقونة TypeScript لضبط التوازن البصري */
 .icon-ts {
   width: 55px !important;
   height: 55px !important;
@@ -733,8 +725,6 @@ button {
   letter-spacing: 1px;
 }
 
-
-/* Responsiveness Fixes */
 @media (max-height: 700px) {
   .skill-card {
     padding: 15px 10px;
@@ -1658,7 +1648,6 @@ textarea:focus {
   border: none;
 }
 
-/* Private Modal Specific */
 .private-icon {
   width: 80px;
   height: 80px;
