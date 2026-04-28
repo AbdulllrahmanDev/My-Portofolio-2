@@ -690,7 +690,7 @@ button {
 
 .skill-card i,
 .skill-card img {
-  /* توحيد الحجم ليكون مثل أيقونة SQL */
+  /* الحجم القياسي لبقية المهارات */
   font-size: 3.2rem;
   width: 65px;
   height: 65px;
@@ -700,6 +700,19 @@ button {
   object-fit: contain;
   margin: 0 auto;
   transition: all 0.4s ease;
+}
+
+/* تكبير خاص للثلاثة الأوائل (HTML, CSS, JS) */
+.icon-featured {
+  font-size: 4.2rem !important;
+  width: 85px !important;
+  height: 85px !important;
+}
+
+/* تصغير خاص لأيقونة TypeScript لضبط التوازن البصري */
+.icon-ts {
+  width: 55px !important;
+  height: 55px !important;
 }
 
 .skill-card:hover i,
