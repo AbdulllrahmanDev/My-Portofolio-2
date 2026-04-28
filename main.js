@@ -386,3 +386,63 @@ if (scrollTopBtn) {
     lenis.scrollTo(0);
   });
 }
+
+// Handle Horizontal Scroll for About & Skills Zone (Two-Stage Animation)
+function handleHorizontalScroll() {
+  const zone = document.getElementById('horizontal-zone');
+  const track = document.getElementById('horizontal-track');
+  const skillsRow = document.getElementById('skills-row');
+  
+  if (zone && track && skillsRow) {
+    const windowHeight = window.innerHeight;
+    const windowWidth = window.innerWidth;
+    const rect = zone.getBoundingClientRect();
+    
+    if (rect.top <= 0 && rect.bottom >= windowHeight) {
+      const totalScrollHeight = rect.height - windowHeight;
+      const currentScroll = -rect.top;
+      
+      // Phase 1: Reveal Skills Section (0% to 25% of scroll)
+      const phase1Duration = totalScrollHeight * 0.25; 
+      if (currentScroll <= phase1Duration) {
+        const progress1 = currentScroll / phase1Duration;
+        track.style.transform = `translate3d(${-progress1 * 100}vw, 0, 0)`;
+        skillsRow.style.transform = `translate3d(0, 0, 0)`;
+      } 
+      // Phase 2: Scroll skills row (25% to 100% of scroll)
+      else {
+        track.style.transform = `translate3d(-100vw, 0, 0)`; 
+        
+        const phase2Scroll = currentScroll - phase1Duration;
+        const phase2Duration = totalScrollHeight - phase1Duration;
+        const progress2 = phase2Scroll / phase2Duration;
+        
+        const trackWidth = skillsRow.scrollWidth;
+        // Calculation: Total width minus half the window width to end in the center
+        // We also account for the initial padding/offset
+        const maxMove = trackWidth - (windowWidth / 2); 
+        
+        skillsRow.style.transform = `translate3d(${-progress2 * maxMove}px, 0, 0)`;
+      }
+    } else if (rect.top > 0) {
+      track.style.transform = `translate3d(0, 0, 0)`;
+      skillsRow.style.transform = `translate3d(0, 0, 0)`;
+    } else if (rect.bottom < windowHeight) {
+      // Ensure it stays at the end position when scrolled past
+      const trackWidth = skillsRow.scrollWidth;
+      const maxMove = trackWidth - (windowWidth / 2);
+      track.style.transform = `translate3d(-100vw, 0, 0)`;
+      skillsRow.style.transform = `translate3d(${-maxMove}px, 0, 0)`;
+    }
+  }
+}
+
+// Optimized event listeners
+if (typeof lenis !== 'undefined') {
+  lenis.on('scroll', handleHorizontalScroll);
+}
+window.addEventListener('scroll', handleHorizontalScroll);
+handleHorizontalScroll();
+
+
+ص

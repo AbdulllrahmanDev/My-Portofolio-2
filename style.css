@@ -249,15 +249,13 @@ button {
    HERO SECTION
    ============================================================ */
 .hero {
-  position: sticky;
-  top: 0;
+  position: relative;
   padding: 100px 0;
   border-bottom: var(--border);
   min-height: 100vh;
   display: flex;
   align-items: center;
   background: var(--color-white);
-  z-index: 1;
 }
 
 .hero__inner {
@@ -432,17 +430,12 @@ button {
 .about {
   padding: 100px 0;
   border-bottom: var(--border);
-  position: sticky;
-  top: 0;
+  position: relative;
   min-height: 100vh;
   display: flex;
   align-items: center;
   background: var(--color-black);
   color: var(--color-white);
-  border-top-left-radius: 40px;
-  border-top-right-radius: 40px;
-  box-shadow: 0 -20px 40px rgba(0, 0, 0, 0.2);
-  z-index: 2;
 }
 
 .about .bg-grid {
@@ -554,48 +547,230 @@ button {
 }
 
 /* ============================================================
-   SKILLS SECTION
+   HORIZONTAL ZONE (ABOUT + SKILLS)
    ============================================================ */
-.skills {
-  padding: 100px 0;
-  border-bottom: var(--border);
-  background: var(--color-white);
+/* ============================================================
+   HORIZONTAL ZONE (ABOUT + SKILLS)
+   ============================================================ */
+.horizontal-zone {
+  height: 400vh;
   position: relative;
-  z-index: 3;
+  background: var(--color-black);
+  /* Default fallback */
 }
 
-.skills__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  gap: 20px;
+.horizontal-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.horizontal-track {
+  display: flex;
+  width: 200vw;
+  height: 100vh;
+  will-change: transform;
+}
+
+.about,
+.skills-horizontal {
+  width: 100vw;
+  height: 100vh;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 0 5%;
+  overflow: hidden;
+  /* لمنع أي تداخل خارجي */
+}
+
+.about {
+  background: #000 !important;
+  /* خلفية سوداء صلبة */
+  color: var(--color-white);
+  z-index: 1;
+}
+
+.skills-horizontal {
+  background: #fff !important;
+  color: var(--color-black);
+  z-index: 2;
+}
+
+.skills-horizontal .container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  /* ليكون العنوان والمهارات على نفس الخط يساراً */
+  width: 100%;
+}
+
+.skills-scroll-area {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  /* تبدأ المهارات من نفس بداية العنوان */
+  margin-top: 50px;
+}
+
+.skills__row {
+  display: flex;
+  gap: 40px;
+  width: max-content;
+  padding: 20px 0;
+}
+
+.skills-horizontal__content {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.skills__row {
+  display: flex;
+  gap: 50px;
+  width: max-content;
+  padding: 20px 0;
 }
 
 .skill-card {
-  border: var(--border);
-  padding: 24px;
-  border-radius: var(--radius-md);
+  border: 2px solid #000;
+  padding: 50px 30px;
+  border-radius: 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
-  background: var(--color-white);
+  justify-content: center;
+  gap: 20px;
+  background: #fff;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  min-width: 260px;
+  text-align: center;
+}
+
+/* استعادة تأثير التعبئة (Liquid Fill) */
+.skill-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  background: #000;
+  z-index: 0;
+  transition: all 0.4s ease;
+}
+
+.skill-card:hover {
+  transform: translateY(-15px);
+  box-shadow: 20px 20px 0 rgba(0, 0, 0, 0.1);
+}
+
+.skill-card:hover::after {
+  height: 100%;
+}
+
+.skill-card i,
+.skill-card img,
+.skill-card span {
+  position: relative;
+  z-index: 1;
+  transition: all 0.4s ease;
 }
 
 .skill-card i,
 .skill-card img {
-  font-size: 2.2rem;
-  width: 40px;
-  height: 40px;
+  /* توحيد الحجم ليكون مثل أيقونة SQL */
+  font-size: 3.2rem;
+  width: 65px;
+  height: 65px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   object-fit: contain;
+  margin: 0 auto;
+  transition: all 0.4s ease;
+}
+
+.skill-card:hover i,
+.skill-card:hover span {
+  color: #fff;
+}
+
+.skill-card:hover img {
+  filter: invert(1);
 }
 
 .skill-card span {
-  font-weight: 700;
+  display: block;
+  width: 100%;
+  font-weight: 800;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-.skill-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 6px 6px 0 #000;
+
+/* Responsiveness Fixes */
+@media (max-height: 700px) {
+  .skill-card {
+    padding: 15px 10px;
+    gap: 10px;
+  }
+
+  .skill-card i,
+  .skill-card img {
+    width: 35px;
+    height: 35px;
+    font-size: 1.8rem;
+  }
+
+  .skills__grid-new {
+    gap: 10px;
+  }
+}
+
+@media (max-width: 1100px) {
+  .skills__grid-new {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .skills__grid-new {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .about__inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 40px;
+  }
+
+  .about__heading {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .skills__grid-new {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .skill-card span {
+    font-size: 0.8rem;
+  }
 }
 
 /* ============================================================
@@ -606,7 +781,6 @@ button {
   border-bottom: var(--border);
   position: relative;
   background: var(--color-gray-100);
-  z-index: 4;
 }
 
 .projects__grid {
@@ -689,7 +863,6 @@ button {
   padding: 100px 0;
   background: var(--color-white);
   position: relative;
-  z-index: 5;
 }
 
 .contact__header {
@@ -1049,8 +1222,13 @@ textarea:focus {
 }
 
 @keyframes float-bg {
-  0% { transform: translate(0, 0) scale(1); }
-  100% { transform: translate(10%, 10%) scale(1.1); }
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  100% {
+    transform: translate(10%, 10%) scale(1.1);
+  }
 }
 
 .auth-page__container {
@@ -1078,8 +1256,15 @@ textarea:focus {
 }
 
 @keyframes auth-emerge {
-  0% { transform: scale(0.9); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 .auth-page__card::after {
@@ -1478,7 +1663,7 @@ textarea:focus {
   .preview-modal {
     padding: 10px;
   }
-  
+
   .preview-modal__container {
     box-shadow: 10px 10px 0 #000;
   }
