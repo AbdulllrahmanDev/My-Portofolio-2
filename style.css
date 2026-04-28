@@ -1261,7 +1261,7 @@ textarea:focus {
 .custom-modal__content {
   background: var(--color-white);
   border: 3px solid var(--color-black);
-  border-radius: 8px;
+  border-radius: 0;
   padding: 32px;
   max-width: 400px;
   width: 100%;

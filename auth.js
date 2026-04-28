@@ -254,7 +254,8 @@ window.addEventListener('DOMContentLoaded', () => {
 /* ============================================================
    PROJECT LINK HANDLING & MODALS
    ============================================================ */
-function handleProjectLink(url, title, type) {
+function handleProjectLink(event, url, title, type) {
+  if (event) event.preventDefault();
   // Explicitly handle project behavior by name
   if (title === 'Mobile Store') {
     if (type === 'demo') {
