@@ -197,7 +197,13 @@ function revealPortfolio() {
   const authPage = document.getElementById('auth-page');
   const mainContent = document.getElementById('main-content');
   
-  if (authPage) authPage.style.display = 'none';
+  if (authPage) {
+    authPage.classList.add('fade-out');
+    setTimeout(() => {
+      authPage.style.display = 'none';
+    }, 800);
+  }
+  
   if (mainContent) mainContent.style.display = 'block';
   document.body.classList.remove('auth-locked');
   
